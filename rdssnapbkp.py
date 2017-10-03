@@ -2,6 +2,8 @@
 #Maintainer - Umesh Pandey ucpandey2@gmail.com 
 #any one free to use modify and redistribute this utility - This tools is to create manual snapshot of an Oracle RDS &  manage
 #retnetion  
+#Usage : The script to be run from an EC2 machine that has assigned IAM role to create RDS snapshot and ability to connect RDS .
+#Update the appropriate region and provide RDS DB name in the script 
 import boto.rds
 import pprint
 import time
@@ -58,7 +60,7 @@ def purgeoldsnapshots(backupdb,backupdir):
         	filenames.append(file)
 
 
-	conn = boto.rds2.connect_to_region("us-west-2")
+	conn = boto.rds2.connect_to_region("us-west-2") #AWS region to be updated . The script can run from a host that has assigned IAM role to create SNAPSHOT
 	snapshots = conn.describe_db_snapshots()
 	list_snapshots = snapshots['DescribeDBSnapshotsResponse']['DescribeDBSnapshotsResult']['DBSnapshots']
 	for snap in list_snapshots:
@@ -85,13 +87,13 @@ def purgeoldsnapshots(backupdb,backupdir):
 				print "No snapshot backup for " + dbname + " deleted "
 
 if(__name__ == "__main__"):
-	backup_file_dir='/vol01/scripts/rds_snapshots' #
+	#Provide a location to create .bak zero byte file
+	backup_file_dir='/vol01/scripts/rds_snapshots' # location where the .bak file to be created . This file is used to identify the snapshot age
 	#below dict will need to be modfied to add/delete/update retention of the RDS DB backup . Add RDS DB to take backup
 	#retention 183 days for Monthly backup 
 	#retention 2555 days for yearly backup
 	#yearly backup is taken on 1st feb
-	#backupdb = {'ordb01':{'retention':{'M':183,'Y':2555}}}
-	backupdb = {'awssqlint01':{'retention':{'M':183,'Y':2555}}}
+	backupdb = {'<DB Name>':{'retention':{'M':183,'Y':2555}}} #pass the RDS DB name 
 	print "Starting manual snapshot backup of " + str(backupdb.keys()) + " RDS databases "
 	backupschedule = {
 				'1-January'	:'M',
