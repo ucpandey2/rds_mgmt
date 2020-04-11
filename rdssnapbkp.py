@@ -88,7 +88,7 @@ def purgeoldsnapshots(backupdb,backupdir):
 
 if(__name__ == "__main__"):
 	#Provide a location to create .bak zero byte file
-	backup_file_dir='/vol01/scripts/rds_snapshots' # location where the .bak file to be created . This file is used to identify the snapshot age
+	backup_file_dir='<>' # /vol01/scripts/rds_snapshots' location where the .bak file to be created . This file is used to identify the snapshot age
 	#below dict will need to be modfied to add/delete/update retention of the RDS DB backup . Add RDS DB to take backup
 	#retention 183 days for Monthly backup 
 	#retention 2555 days for yearly backup
