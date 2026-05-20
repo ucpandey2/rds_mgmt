@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-#Maintainer - Umesh Pandey ucpandey2@gmail.com 
-#any one free to use modify and redistribute this utility - This tools is to create manual snapshot of an Oracle RDS &  manage
-#retnetion  
+#Maintainer -  Umesh Pandey
+#anyone is free to use modify and redistribute this utility - This tool is to create a manual snapshot of an Oracle RDS & manage
+#retention  
 #Usage : The script to be run from an EC2 machine that has assigned IAM role to create RDS snapshot and ability to connect RDS .
 #Update the appropriate region and provide RDS DB name in the script 
 import boto.rds
